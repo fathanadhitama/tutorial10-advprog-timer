@@ -104,6 +104,19 @@ fn main() {
         TimerFuture::new(Duration::new(2, 0)).await;
         println!("Fathan's computer: done!");
     });
+    spawner.spawn(async {
+        println!("Fathan's computer: howdy2!");
+        // Wait for our timer future to complete after two seconds.
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Fathan's computer: done2!");
+    });
+    spawner.spawn(async {
+        println!("Fathan's computer: howdy3!");
+        // Wait for our timer future to complete after two seconds.
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Fathan's computer: done3!");
+    });
+    println!("Fathan's computer: bonjour!");
 
     // Drop the spawner so that our executor knows it is finished and won't
     // receive more incoming tasks to run.
@@ -112,5 +125,4 @@ fn main() {
     // Run the executor until the task queue is empty.
     // This will print "howdy!", pause, and then print "done!".
     executor.run();
-    println!("Fathan's computer: bonjour!");
 }
